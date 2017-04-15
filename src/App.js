@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Search from './components/Search.js';
+import Table from './components/Table.js';
 import './App.css';
 
 const list = [
@@ -20,9 +22,6 @@ const list = [
   },
 ];
 
-const isSearched = searchTerm => item =>
-  !searchTerm || item.title.toLowerCase().includes(searchTerm.toLowerCase());
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +31,7 @@ class App extends Component {
     };
   }
 
-  onDismiss = id => {
+  handleDismiss = id => {
     const isNotId = item => item.objectID !== id;
     const updatedList = this.state.list.filter(item => isNotId(item));
     this.setState({
@@ -40,7 +39,7 @@ class App extends Component {
     });
   };
 
-  onSearchChange = event => {
+  handleSearchChange = event => {
     this.setState({searchTerm: event.target.value});
   };
 
@@ -48,20 +47,17 @@ class App extends Component {
     const {searchTerm, list} = this.state;
     return (
       <div className="App">
-        <input type="text" value={searchTerm} onChange={this.onSearchChange} />
-        {list.filter(isSearched(searchTerm)).map(item => (
-          <div key={item.objectID}>
-            <span>
-              <a href={item.url}>{item.title}</a>
-            </span>
-            <span>{item.author}</span>
-            <span>{item.num_comments}</span>
-            <spane>{item.points}</spane>
-            <button type="button" onClick={() => this.onDismiss(item.objectID)}>
-              Dismiss
-            </button>
-          </div>
-        ))}
+        <Search
+          searchTerm={searchTerm}
+          onSearchChange={this.handleSearchChange}
+        >
+          Search
+        </Search>
+        <Table
+          list={list}
+          searchTerm={searchTerm}
+          onDismiss={this.handleDismiss}
+        />
       </div>
     );
   }
