@@ -1,1 +1,1 @@
-# hacker-news
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and it's based on [this book](https://leanpub.com/the-road-to-learn-react) from [Robin Wieruch](https://www.robinwieruch.de/).
