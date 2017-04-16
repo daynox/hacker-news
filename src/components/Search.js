@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-const Search = props => {
-  const {searchTerm, onSearchChange, children} = props;
+const Search = ({searchTerm, onSearchChange, children}) => {
   return (
     <form>
       {children}
