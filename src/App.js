@@ -46,6 +46,12 @@ class App extends Component {
     this.setState({searchTerm: event.target.value});
   };
 
+  handleSearchSubmit = event => {
+    const {searchTerm} = this.state;
+    this.fetchSearchTopstories(searchTerm);
+    event.preventDefault();
+  };
+
   render() {
     const {searchTerm, result} = this.state;
     if (!result) {
@@ -57,15 +63,12 @@ class App extends Component {
           <Search
             searchTerm={searchTerm}
             onSearchChange={this.handleSearchChange}
+            onSearchSubmit={this.handleSearchSubmit}
           >
             Search
           </Search>
         </div>
-        <Table
-          list={result.hits}
-          searchTerm={searchTerm}
-          onDismiss={this.handleDismiss}
-        />
+        {result && <Table list={result.hits} onDismiss={this.handleDismiss} />}
       </div>
     );
   }

@@ -1,10 +1,7 @@
 import React from 'react';
 import Button from './Button';
 
-const isSearched = searchTerm => item =>
-  !searchTerm || item.title.toLowerCase().includes(searchTerm.toLowerCase());
-
-const Table = ({list, searchTerm, onDismiss}) => {
+const Table = ({list, onDismiss}) => {
   const largeColumn = {
     width: '40%',
   };
@@ -18,7 +15,7 @@ const Table = ({list, searchTerm, onDismiss}) => {
   };
   return (
     <div className="table">
-      {list.filter(isSearched(searchTerm)).map(item => (
+      {list.map(item => (
         <div key={item.objectID} className="table-row">
           <span style={largeColumn}>
             <a href={item.url}>{item.title}</a>
